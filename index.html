@@ -1,0 +1,264 @@
+<!DOCTYPE html><html land="ru-RU"><head><title>H.A.R. Документация</title><meta charset="utf-8" /><meta name='viewport' content='width=device-width, initial-scale=1.0' /><meta http-equiv='X-UA-Compatible' content='IE=edge' />
+<style>
+*,*::before,*::after{outline:none;white-space:normal;word-break:break-word;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";font-size:16px;line-height:1.6;color:#24292F;}
+body>input,article{display:none;}
+body>input:checked+article,label,details>a,hr,h1,h2,[c_up],[c_hint]{display:block;}
+a{text-decoration:none;}
+a,h2,h2::before{color:#0969DA;}
+article,aside{bottom:0;overflow-y:scroll;background-color:#FFFFFF;}
+article>label,hr,kbd,aside>label{background-color:#0F0F0F;}
+article>label,kbd,aside>label,[c_up]{color:#FFFFFF;}
+article,aside,article>label,[c_up]{position:fixed;top:0;right:0;}
+article,aside,article>label{left:0;}
+article,aside{padding:8px 16px 16px 16px;}
+article>label,aside>label,pre,[c_up]{padding:8px 16px;}
+[c_pre],th,td{padding:8px;}
+[c_pre],table{width:100%;}
+table{border-collapse:collapse;border-top:1px solid #D0D7DE;border-left:1px solid #D0D7DE;}
+th,td{vertical-align:top;border-bottom:1px solid #D0D7DE;border-right:1px solid #D0D7DE;}
+article>*,aside>*,details>*,article li{margin:16px 0 0 0;}
+details{border-left:2px solid #D0D7DE;}
+h1{margin-top:48px;font-size:26px;}
+[c_pre]{font-style:italic;}
+h1,article>label,[c_up]{font-weight:800;}
+h2,strong,th{font-weight:600;}
+ol,ul{padding:0 0 0 16px;}
+ul{list-style:square;}
+h2::before{content:'# ';}
+aside{z-index:1;}
+article{z-index:2;}
+article>label{z-index:3;}
+article>label,[c_up]{margin-top:0;}
+[c_up]{z-index:4;width:50%;text-align:right;}
+article>label,h1,[c_up],summary{text-transform:uppercase;}
+aside>label,article>label,summary{cursor:pointer;}
+kbd{padding:2px 6px;}
+kbd,[c_pre]{border-radius:4px;}
+pre{max-height:300px;background-color:#EFF1F3;}
+hr{height:1px;border:none;}
+[c_pre]{border:1px solid #D0D7DE;background:#FFFFFF;}
+[c_danger]{border-left:2px solid #D33D3D;}
+[c_hint],details{padding-left:16px;}
+aside>label{font-weight:200;}
+h2,aside>label{font-size:18px;}
+</style>
+</head><body>
+
+<aside>
+<h1>H.A.R. Документация</h1>
+<label for="mods">Система модификаций</strong></label>
+<label for="languages">Локализация игры</strong></label>
+<label for="blip">Файл <strong>setup.blip</strong></label>
+<label for="map">Файлы <strong>*.map</strong></label>
+
+<div align="center"><a href="https://discord.gg/9kdww4W86P">GTABuilder</a> ∙ <a href="https://github.com/wmysterio/wmysterio.github.io">GitHub</a> ∙ <a href="https://github.com/wmysterio/wmysterio.github.io/archive/refs/heads/main.zip">Скачать</a> ∙ <a href="https://wmysterio.github.io/">WEB-версия</a></div>
+
+</aside>
+
+<!-- MODS -->
+
+<input id="mods" type="checkbox" autocomplete="off" /><article><label for="mods">назад</label><a c_up href="#TOP_MOD_SYSTEM">вверх</a>
+<a name="TOP_MOD_SYSTEM"></a>
+<h1>Система модификаций</h1>
+<p>Система модов действует как отдельная «часть тела» игры. Без неё игра не должна загружаться и будет выдавать предупреждение. Все моды создаются в папке:</p>
+<input c_pre type="text" readonly="readonly" value="Игра\addons\mods" />
+<p>Для каждого мода нужно создать отдельную папку. Это позволит быстро добавлять или удалять мод. Файлы мода должны находится в одной папке, без вложений. Скрипты же могут загружать файлы из разных мест.</p>
+<p>Главным модом является тот, что имеет имя <kbd>main</kbd>. Он всегда загружается и выполняется первым. Потом все остальные.</p>
+<p>Каждый мод может содержать кроме стандартный файлов ещё и специальные, на которых будет реагировать игра при нахождении таковых.</p>
+<p>На текущий момент специальными являются следующие файлы:</p>
+<table>
+<thead><tr><th>Файл</th><th>Описание</th></tr></thead>
+<tbody>
+<tr><td><kbd>radar.blips</kbd></td><td>Информация о новых иконках радара</td></tr>
+<tr><td><kbd>*.map</kbd></td><td>Любой файл с этим расширением содержит информацию про карту</td></tr>
+<tr><td><kbd>*.txt</kbd></td><td>При определённых ситуациях может считаться файлом локализации</td></tr>
+</tbody>
+</table>
+<p>Все специальные файлы являются текстовыми и имеют одинаковый формат; могут быть отредактированы обычным блокнотом. Строки до первого символа <kbd>#</kbd> в строке считаются комментариями и игнорируются. После него идут команды в формате:</p>
+<input c_pre type="text" readonly="readonly" value="КОМАНДА [агрументы...]" />
+<p>Все команды пишутся в верхнем регистре. Команда и каждый её агрумент разделяются символами пробела или табуляции (минимум 1 символ). Для вещественных чисел разделителем является символ <kbd>.</kbd>.</p>
+<p>Каждый специальный файл имеет собственные команды. Их описание можной найти в этой документации.</p>
+<p c_hint c_danger>Имя папки для мода должно быть в нижнем регистре, без пробелов. Желательно латиницей (от <strong>a</strong> до <strong>z</strong>)!</p>
+
+</article>
+
+<!-- LANGUAGES -->
+
+<input id="languages" type="checkbox" autocomplete="off" /><article><label for="languages">назад</label><a c_up href="#TOP_LANGUAGES">вверх</a>
+<a name="TOP_LANGUAGES"></a>
+<h1>Локализация игры</h1>
+
+<details open>
+<summary>Содержание</summary>
+<a href="#GLOBAL_LANGUAGE">Глобальная локализация</a>
+<a href="#MODS_LANGUAGE">Локализация модификаций</a>
+</details>
+
+<a name="GLOBAL_LANGUAGE"></a><hr /><h2>Глобальная локализация</h2>
+<p>Игра не имеет ограничений на количество языков. Можно добавить любое количество. Для этого достаточно создать текстовый файл в папке <strong>languages</strong>:</p>
+<input c_pre type="text" readonly="readonly" value="Игра\addons\languages\XX_YYYY.txt" />
+<ul>
+<li><kbd>XX</kbd> — уникальный идентификатор языка <kbd>ID</kbd>. Максимум три латинские буквы в верхнем регистре (от <strong>A</strong> до <strong>Z</strong>)</li>
+<li><kbd>YYYY</kbd> — название языка, который будет отображаться в меню выбора языка</li>
+</ul>
+<p>Например:</p>
+<input c_pre type="text" readonly="readonly" value="Игра\addons\languages\RU_Русский.txt" />
+<p>Главное, чтобы номера строк совпадали с оригинальными. Некоторые строки также нуждаются в соблюдении форматов C# (<kbd>{0}</kbd>, <kbd>{1}</kbd> и т.п.). В целом процесс не сложный; только требует немного времени.</p>
+<p>Файлы, созданные таким способ, будут глобальными. Именно их игра предложит выбирать при старте каждого сеанса игры.</p>
+
+<a name="MODS_LANGUAGE"></a><hr /><h2>Локализация модификаций</h2>
+<p>Поскольку модификации не могут заранее узнать какие глобальные языки будут подключены и выбраны пользователем, нужно создавать отдельные файлы локализации для своих целей. Например:</p>
+<input c_pre type="text" readonly="readonly" value="Игра\addons\mods\XXXX\RU.txt" />
+<ul>
+<li><kbd>XXXX</kbd> — название папки мода</li>
+</ul>
+<p>Игра будет загружать язык для модификации методом подбора. Приоритеты подбора таковы:</p>
+<table><tbody>
+<tr><td style="width:32px;">1</td><td>Файл <kbd>*.txt</kbd> согласно идентификатору выбранного языка</td></tr>
+<tr><td>2</td><td>Файл <kbd>EN.txt</kbd></td></tr>
+<tr><td>3</td><td>Первый найденный файл формата <kbd>*.txt</kbd>, который отвечает формату имени идентификатора</td></tr>
+<tr><td colspan="2" c_danger>В случае, если языков в модификации нет или её не удалось загрузить, все запросы будут возвращать пустые строки!</td></tr>
+</tbody></table>
+<p>Такой подход позволит делать локализации не только игры, но и конкретных модов без участия его разработчика.</p>
+
+</article>
+
+<!-- BLIPS -->
+<input id="blip" type="checkbox" autocomplete="off" /><article><label for="blip">назад</label><a c_up href="#TOP_BLIP">вверх</a>
+<a name="TOP_BLIP"></a>
+<h1>Файл setup.blip</h1>
+
+<p>Этот файл содержит информацию об иконках радара. Иконки отображаются на радаре, в меню карты и легенде карты. Загружается только один раз: вначале игры. Использует файл локализации и изображения формата <strong>*.png</strong> в папке мода. Например:</p>
+<input c_pre type="text" readonly="readonly" value="Игра\addons\mods\XXXX\YYYY.png" />
+<ul>
+<li><kbd>XXXX</kbd> — название папки мода</li>
+<li><kbd>YYYY</kbd> — название файла</li>
+</ul>
+<p c_hint c_danger>Если изображения нет в папке физически или его не удалось загрузить, то будет использоваться прозрачная текстура!</p>
+
+<details open>
+<summary>Команды</summary>
+<a href="#ADD_BLIP">ADD_BLIP</a>
+<a href="#ADD_BLIP_HIDDEN">ADD_BLIP_HIDDEN</a>
+</details>
+
+<a name="ADD_BLIP"></a><hr /><h2>ADD_BLIP</h2>
+<p>Добавляет новую иконку радара. По умолчанию отображается в легенде карты.</p>
+<pre>ADD_BLIP cj 1</pre>
+<ul>
+<li><kbd>cj</kbd> — название файла изображения (строка)</li>
+<li><kbd>1</kbd> —  номер строки в файле локализации</li>
+</ul>
+
+<a name="ADD_BLIP_HIDDEN"></a><hr /><h2>ADD_BLIP_HIDDEN</h2>
+<p>Добавляет новую иконку радара. По умолчанию скрывается в легенде карты.</p>
+<pre>ADD_BLIP_HIDDEN cj 1</pre>
+<ul>
+<li><kbd>cj</kbd> — название файла изображения (строка)</li>
+<li><kbd>1</kbd> —  номер строки в файле локализации</li>
+</ul>
+
+</article>
+
+<!-- MAPS -->
+<input id="map" type="checkbox" autocomplete="off" /><article><label for="map">назад</label><a c_up href="#TOP_MAP">вверх</a>
+<a name="TOP_MAP"></a>
+<h1>Файлы *.map</h1>
+
+<p>Файл с расширением <strong>*.map</strong> хранит информацию об игровой карте. Описываются объекты, каторые нужно загружать игре; зоны и прочее. Одновременно игра загружает только одну карту. Файлы объектов должны находится в папке:</p>
+<input c_pre type="text" readonly="readonly" value="Игра\addons\mods\XXXX" />
+<ul><li><kbd>XXXX</kbd> — название папки мода</li></ul>
+<p c_hint c_danger>Вы можете указать объект из другого мода, но если файла физически нет или его не удалось загрузить, то в игре будет создан объект-пустышка!</p>
+<p c_hint c_danger>Имя файла является номером строки в файле локализации!</p>
+
+<details open>
+<summary>Команды</summary>
+<a href="#OVERRIDE_DEFAULT_PLAYER_POSITION">OVERRIDE_DEFAULT_PLAYER_POSITION</a>
+<a href="#ADD_HOSPITAL_RESTART">ADD_HOSPITAL_RESTART</a>
+<a href="#ADD_POLICE_RESTART">ADD_POLICE_RESTART</a>
+<a href="#ADD_MAP_TELEPORT">ADD_MAP_TELEPORT</a>
+<a href="#ADD_LOCATION_TELEPORT">ADD_LOCATION_TELEPORT</a>
+<a href="#ADD_ZONE">ADD_ZONE</a>
+<a href="#ADD_OBJECT">ADD_OBJECT</a>
+</details>
+
+<a name="OVERRIDE_DEFAULT_PLAYER_POSITION"></a><hr /><h2>OVERRIDE_DEFAULT_PLAYER_POSITION</h2>
+<p>Переопределяет точку старта игрока на карте при загрузке карты (по умолчанию).</p>
+<pre>OVERRIDE_DEFAULT_PLAYER_POSITION 1.0 2.0 3.0 4.0</pre>
+<ul>
+<li><kbd>1.0 2.0 3.0</kbd> — координаты старта</li>
+<li><kbd>4.0</kbd> — угол поворота (ось <strong>Y</strong>)</li>
+</ul>
+
+<a name="ADD_HOSPITAL_RESTART"></a><hr /><h2>ADD_HOSPITAL_RESTART</h2>
+<p>Добавляет новую точку рестарта (действует после смерти игрока). Если нет ни одной точки, то рестарт будет в точке старта карты. Если точек несколько, то респавн будет происходить в близжайшей к игроку.</p>
+<pre>ADD_HOSPITAL_RESTART 1.0 2.0 3.0 4.0 5000</pre>
+<ul>
+<li><kbd>1.0 2.0 3.0</kbd> — координаты рестарта</li>
+<li><kbd>4.0</kbd> — угол поворота (ось <strong>Y</strong>)</li>
+<li><kbd>5000</kbd> — максимальная цена за лечение</li>
+</ul>
+
+<a name="ADD_POLICE_RESTART"></a><hr /><h2>ADD_POLICE_RESTART</h2>
+<p>Добавляет новую точку рестарта (действует после ареста игрока). Если нет ни одной точки, то рестарт будет в точке старта карты. Если точек несколько, то респавн будет происходить в близжайшей к игроку.</p>
+<pre>ADD_POLICE_RESTART 1.0 2.0 3.0 4.0 5000</pre>
+<ul>
+<li><kbd>1.0 2.0 3.0</kbd> — координаты рестарта</li>
+<li><kbd>4.0</kbd> — угол поворота (ось <strong>Y</strong>)</li>
+<li><kbd>5000</kbd> — максимальная цена за освобождение</li>
+</ul>
+
+<a name="ADD_MAP_TELEPORT"></a><hr /><h2>ADD_MAP_TELEPORT</h2>
+<p>Добавляет точку телепортации на другую карту. Будет показано окно с выбором доступных карт.</p>
+<pre>ADD_MAP_TELEPORT 1.0 2.0 3.0</pre>
+<ul>
+<li><kbd>1.0 2.0 3.0</kbd> — позиция телепорта</li>
+</ul>
+
+<a name="ADD_LOCATION_TELEPORT"></a><hr /><h2>ADD_LOCATION_TELEPORT</h2>
+<p>Добавляет точку телепортации в пределах текущей карты. Будет показано окно с выбором доступных точок.</p>
+<pre>ADD_LOCATION_TELEPORT 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8</pre>
+<ul>
+<li><kbd>1.0 2.0 3.0</kbd> — координаты телепорта</li>
+<li><kbd>4.0 5.0 6.0</kbd> — координаты пункта назначения</li>
+<li><kbd>7.0</kbd> — угол поворота (ось <strong>Y</strong>)</li>
+<li><kbd>8</kbd> — номер строки в файле локализации. Используется в качестве названия пункта назначения</li>
+</ul>
+
+<a name="ADD_ZONE"></a><hr /><h2>ADD_ZONE</h2>
+<p>Создаёт новую зону на карте. В игре это будет невидимый куб в режиме тригера.</p>
+<pre>ADD_ZONE zone_id 2 3.0 4.0 5.0 6.0 7.0 8.0 9</pre>
+<ul>
+<li><kbd>zone_id</kbd> — идентификатор зоны (строка). Можно использовать для проверок в скриптах</li>
+<li><kbd>2</kbd> — тип зоны. Диапазон значений от <strong>0</strong> до <strong>255</strong> включительно (<strong>byte</strong>).</li>
+<li><kbd>3.0 4.0 5.0</kbd> — координаты центра</li>
+<li><kbd>6.0 7.0 8.0</kbd> — радиусы действия</li>
+<li><kbd>9</kbd> — номер строки в файле локализации. Используется в качестве названия пункта назначения</li>
+</ul>
+<p>Большинство типов зон не влияет на игру. Однако есть исключения, которые будут влиять на генерацию актёров и транспорта, игнорируя их любые настройки:</p>
+<table>
+<thead><tr><th style="width:56px;">Тип</th><th>Ограничения</th></tr></thead>
+<tbody>
+<tr><td>253</td><td>Нет актёров, но есть транспорт</td></tr>
+<tr><td>254</td><td>Нет транспорта, но есть актёры</td></tr>
+<tr><td>255</td><td>Нет актёров и транспорта (пустая зона)</td></tr>
+</tbody>
+</table>
+<p>Ограничения действуют только на генерацию новых сущностей, но имеющиеся (включая скриптовые) могут блуждать по этим зонам.</p>
+
+<a name="ADD_OBJECT"></a><hr /><h2>ADD_OBJECT</h2>
+<p>Добавляет на карту новый объект (3D-модель). На текущий момент поддерживается только формат <kbd>*.obj</kbd> и его родной формат для материалов <kbd>*.mtl</kbd>.</p>
+<pre>ADD_OBJECT main roadi 3.0 4.0 5.0 6.0 7.0 8.0</pre>
+<ul>
+<li><kbd>main</kbd> — название мода (строка)</li>
+<li><kbd>roadi</kbd> — название файла (строка)</li>
+<li><kbd>3.0 4.0 5.0</kbd> — координаты объекта</li>
+<li><kbd>6.0 7.0 8.0</kbd> — оси вращения объекта</li>
+</ul>
+<p>В этом примере будет загружаться файл:</p>
+<input c_pre type="text" readonly="readonly" value="Игра\addons\mods\main\roadi.obj" />
+
+</article>
+
+</body></html>
