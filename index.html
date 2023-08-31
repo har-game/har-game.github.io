@@ -249,12 +249,13 @@ h2,aside>label{font-size:18px;}
 
 <a name="ADD_OBJECT"></a><hr /><h2>ADD_OBJECT</h2>
 <p>Добавляет на карту новый объект (3D-модель). На текущий момент поддерживается только формат <kbd>*.obj</kbd> и его родной формат для материалов <kbd>*.mtl</kbd>.</p>
-<pre>ADD_OBJECT main roadi 3.0 4.0 5.0 6.0 7.0 8.0</pre>
+<pre>ADD_OBJECT main roadi 3.0 4.0 5.0 6.0 7.0 8.0 9 10</pre>
 <ul>
 <li><kbd>main</kbd> — название мода (строка)</li>
 <li><kbd>roadi</kbd> — название файла (строка)</li>
 <li><kbd>3.0 4.0 5.0</kbd> — координаты объекта</li>
 <li><kbd>6.0 7.0 8.0</kbd> — оси вращения объекта</li>
+<li><kbd>9 10</kbd> — диапазон времени, в котором будет включаться объект. При равных значениях или если одно из них больше <kbd>23</kbd> объект будет видим всегда.</li>
 </ul>
 <p>В этом примере будет загружаться файл:</p>
 <input c_pre type="text" readonly="readonly" value="Игра\addons\mods\main\roadi.obj" />
